@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'texgy-regular';
+    src: url('../fonts/texgy/texgyreadventor-regular-webfont.eot');
+    src: url('../fonts/texgy/texgyreadventor-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/texgy/texgyreadventor-regular-webfont.woff2') format('woff2'),
+         url('../fonts/texgy/texgyreadventor-regular-webfont.woff') format('woff'),
+         url('../fonts/texgy/texgyreadventor-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'texgy-bold';
+    src: url('../fonts/texgy/texgyreadventor-bold-webfont.eot');
+    src: url('../fonts/texgy/texgyreadventor-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/texgy/texgyreadventor-bold-webfont.woff2') format('woff2'),
+         url('../fonts/texgy/texgyreadventor-bold-webfont.woff') format('woff'),
+         url('../fonts/texgy/texgyreadventor-bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bebas-regular';
+    src: url('../fonts/bebas/bebasneue_regular-webfont.eot');
+    src: url('../fonts/bebas/bebasneue_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bebas/bebasneue_regular-webfont.woff2') format('woff2'),
+         url('../fonts/bebas/bebasneue_regular-webfont.woff') format('woff'),
+         url('../fonts/bebas/bebasneue_regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bebas-bold';
+    src: url('../fonts/bebas/bebasneue_bold-webfont.eot');
+    src: url('../fonts/bebas/bebasneue_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bebas/bebasneue_bold-webfont.woff2') format('woff2'),
+         url('../fonts/bebas/bebasneue_bold-webfont.woff') format('woff'),
+         url('../fonts/bebas/bebasneue_bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin texgy_regular() { font-family: Helvetica,'texgy-regular'; }
+@mixin texgy_bold() { font-family: 'texgy-bold'; }
+
+@mixin bebas_regular() { font-family: 'bebas-regular'; }
+@mixin bebas_bold() { font-family: 'bebas-bold'; }

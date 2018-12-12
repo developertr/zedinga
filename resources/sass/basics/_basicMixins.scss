@@ -1,0 +1,205 @@
+
+@mixin cover_bg($style) {
+    -webkit-background-size: $style;
+    -moz-background-size: $style;
+    -o-background-size: $style;
+    background-size:$style;
+    background-repeat: no-repeat;    
+}
+
+@mixin grayscale($percentage){
+	 filter: grayscale($percentage);
+    -webkit-filter: grayscale($percentage);
+    filter: gray; 
+}
+
+@mixin border-radius($radius:20px) {
+  -webkit-border-radius: $radius;
+   -khtml-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+@mixin transition($property, $duration, $function) {
+	-webkit-transition: $property $duration $function;
+	 -khtml-transition: $property $duration $function;
+	   -moz-transition: $property $duration $function;
+	    -ms-transition: $property $duration $function;
+	     -o-transition: $property $duration $function;
+	        transition: $property $duration $function;
+}
+
+
+@mixin box-shadow($horizontal, $vertical, $blur-radius, $spread, $color) {
+	-webkit-box-shadow: $horizontal $vertical $blur-radius $spread $color;
+	 -khtml-box-shadow: $horizontal $vertical $blur-radius $spread $color;
+	   -moz-box-shadow: $horizontal $vertical $blur-radius $spread $color;
+	    -ms-box-shadow: $horizontal $vertical $blur-radius $spread $color;
+	     -o-box-shadow: $horizontal $vertical $blur-radius $spread $color;
+            box-shadow: $horizontal $vertical $blur-radius $spread $color;
+}
+
+
+@mixin outline($thickness, $outline, $color, $offset){
+	       outline: $thickness $outline $color;
+	outline-offset: $offset;
+}
+
+@mixin transform($scale, $rotate, $translatex, $translatey, $skewx, $skewy){
+ -webkit-transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+  -khtml-transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+	-moz-transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+     -ms-transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+      -o-transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+         transform: scale($scale) rotate($rotate) translateX($translatex) translateY($translatey) skewX($skewx) skewY($skewy);
+}
+
+@mixin translate($tranlatex, $translatey){
+    -webkit-transform: translate($tranlatex,$translatey);
+	   -moz-transform: translate($tranlatex,$translatey); 
+	    -ms-transform: translate($tranlatex,$translatey); 
+	     -o-transform: translate($tranlatex,$translatey); 
+            transform: translate($tranlatex,$translatey); 
+}
+@mixin columns($count, $gap){
+	-webkit-column-count: $count;
+	  -webkit-column-gap: $gap;	
+	 -khtml-column-count: $count;
+	   -khtml-column-gap: $gap;
+	   -moz-column-count: $count;
+	     -moz-column-gap: $gap;
+	    -ms-column-count: $count;
+	      -ms-column-gap: $gap;    
+	     -o-column-count: $count;
+	       -o-column-gap: $gap;
+	        column-count: $count;
+	          column-gap: $gap;
+}
+
+@mixin background-size($style: cover){
+-webkit-background-size: $style;
+  -moz-background-size: $style;
+  -o-background-size: $style;
+  background-size: $style;
+}
+
+@mixin rotate($deg){
+	transform:rotate($deg);
+-ms-transform:rotate($deg); 
+-moz-transform:rotate($deg); 
+-webkit-transform:rotate($deg);
+-o-transform:rotate($deg);
+}
+
+@mixin Opacity($value){
+  $IEValue: $value*100;
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+  filter: alpha(opacity=$IEValue);
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+  text-shadow: $x $y $blur $color;
+}
+
+@mixin box-emboss($outerOpacity, $innerOpacity) {
+  box-shadow:
+  rgba(white, $outerOpacity) 0 1px 0,
+  rgba(black, $innerOpacity) 0 1px 0 inset;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+$parallax-perspective : 1 !default;
+$parallax-element     : "body" !default;
+$parallax-ios         : true !default;
+
+@mixin parallax-init(
+  $perspective  : $parallax-perspective,
+  $element      : $parallax-element,
+  $parallax-ios : $parallax-ios
+) {
+  @if $element == "body" {
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+  #{$element} {
+    overflow: auto;
+    perspective: $perspective * 1px;
+    transform-style: preserve-3d;
+    // Allows for smooth scrolling but disables parallax effects.
+    @if $parallax-ios == false {
+      -webkit-overflow-scrolling: touch;
+    }
+    // Preserve 3D
+    &, * {
+      transform-style: preserve-3d;
+    }
+  }
+}
+
+@mixin parallax(
+  $distance    : 0,
+  $perspective : $parallax-perspective
+) {
+  transform:
+          translateZ($distance * $perspective * 1px)
+          scale(abs($distance - 1));
+  z-index: $distance * 1000;
+}
+
+@mixin x-appearance ($value) {
+  -webkit-appearance: $value;
+  -moz-appearance: $value;
+  appearance: $value;
+}
+
+@mixin border-gradient($dir, $from, $to, $width) {
+  border-left: $width solid $from;
+  border-right: $width solid $to;
+  background-image:
+          // Needed for both the top and bottom borders
+          -webkit-linear-gradient($dir, $from, $to),
+          -webkit-linear-gradient($dir, $from, $to);
+  background-size: 100% $width;
+  background-position: 0 100%, 0 0;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+}
+
+@mixin gradient-border($color1,$color2,$from,$to) {
+  border: 1px solid transparent;
+  -moz-border-image: -moz-linear-gradient($from, $color1 0%, $color2 100%);
+  -webkit-border-image: -webkit-linear-gradient($from, $color1 0%, $color2 100%);
+  border-image: linear-gradient(to $to, $color1 0%, $color2 100%);
+  border-image-slice: 1;
+}
