@@ -11,7 +11,18 @@
 <body>
 <div id="app">
     <vue-snotify></vue-snotify>
-    <login-register-forgot form="register"></login-register-forgot>
+    <loading
+        :active.sync="isLoading"
+        :can-cancel="false"
+        :is-full-page="fullPage"
+        :color="'#fff'"
+        :width="50"
+        :height="50"
+        :background-color="'#000'"
+        :opacity="0.8"
+        :loader="'dots'"
+    ></loading>
+    <login-register-forgot form="login"></login-register-forgot>
 </div>
 </body>
 </html>

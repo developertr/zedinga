@@ -12,10 +12,25 @@ Vue.use(Snotify, {
 });
 import "vue-snotify/styles/material.css";
 
+// Import component
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 Vue.component('login-register-forgot', require('./components/Auth/LoginRegisterForgot'));
 
 const app = new Vue({
     el: '#app',
+    data: {
+        isLoading: false,
+        fullPage: true
+    },
+    components: {
+        Loading
+    },
+    mounted() {
+        // this.isLoading = true;
+    },
     methods:{
         showErrors : function(errors) {
             var i = 0;
@@ -30,5 +45,7 @@ const app = new Vue({
             let val = (value/1).toFixed(0).replace('.', ',');
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
+    },
+    watch: {
     }
 });

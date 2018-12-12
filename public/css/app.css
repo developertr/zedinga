@@ -10586,6 +10586,18 @@ textarea {
   color: #000;
 }
 
+.authForms .form-group input.activationInput {
+  font-size: 40px;
+  height: 70px;
+  text-align: center;
+  font-weight: 900;
+  padding: 0;
+  margin-top: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+}
+
 .authForms .form-group .forgotPassword {
   color: #666;
   display: inline-block;
