@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="profilePreview shadow">
         <div class="profilePicture" v-bind:style="{ backgroundImage: 'url(' + cover + ')' }">
             <div class="score">
                 {{ member.score }}
@@ -14,6 +14,7 @@
             <div class="name">{{ member.name }}</div>
             <div class="username">{{ member.username }}</div>
         </div>
+        <div class="clearfix"></div>
     </div>
 </template>
 

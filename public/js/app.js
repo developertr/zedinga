@@ -65575,7 +65575,6 @@ var render = function() {
                 expression: "profilePreview"
               }
             ],
-            staticClass: "profilePreview",
             attrs: { userId: _vm.profilePreviewId }
           })
         : _vm._e(),
@@ -65958,7 +65957,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65969,6 +65968,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -66030,7 +66030,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "profilePreview shadow" }, [
     _c(
       "div",
       {
@@ -66062,7 +66062,9 @@ var render = function() {
       _c("div", { staticClass: "username" }, [
         _vm._v(_vm._s(_vm.member.username))
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "clearfix" })
   ])
 }
 var staticRenderFns = []

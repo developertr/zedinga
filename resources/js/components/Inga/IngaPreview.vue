@@ -5,7 +5,7 @@
             <img v-else-if="inga.profile_image" v-bind:src="inga.profile_image">
             <img v-else src="/images/logo.png" />
         </div>
-        <profile-preview-box class="profilePreview" :userId="profilePreviewId" v-show="profilePreview" v-if="inga.user_id"></profile-preview-box>
+        <profile-preview-box :userId="profilePreviewId" v-show="profilePreview" v-if="inga.user_id"></profile-preview-box>
         <!--<div class="content" v-html=""></div>-->
         <div class="ingaContent">
             <div class="username">
