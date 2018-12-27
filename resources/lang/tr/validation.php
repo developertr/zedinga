@@ -156,8 +156,13 @@ return [
 
     'attributes' => [
         'username' => 'Kullanıcı Adı',
+        'name' => 'Ad Soyad',
         'email' => 'Email Adresi',
-        'password' => 'Şifre'
+        'password' => 'Şifre',
+        'personal_information' => 'Kişisel Bilgiler',
+        'location_name' => 'Konum Adı',
+        'image' => 'Resim',
+        'mobile_number' => 'Cep Telefonu'
     ],
 
 ];

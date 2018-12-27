@@ -15,6 +15,7 @@ class CreateUserCountersTable extends Migration
     {
         Schema::create('user_counters', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->integer('user_id')->references('id')->on('users');
             $table->integer('follower')->default(0);
             $table->integer('friend')->default(0);
@@ -28,6 +29,7 @@ class CreateUserCountersTable extends Migration
             $table->integer('post_comment')->default(0);
             $table->integer('post_like')->default(0);
             $table->integer('post_dislike')->default(0);
+            $table->integer('post_vote')->default(0);
             $table->timestamps();
         });
     }

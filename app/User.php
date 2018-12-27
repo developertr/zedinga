@@ -31,4 +31,16 @@ class User extends Authenticatable
     public function counters() {
         return $this->hasOne('App\UserCounter');
     }
+
+    public function privacies() {
+        return $this->hasOne('App\UserPrivacy');
+    }
+
+    public function locations() {
+        return $this->hasMany('App\UserLocations');
+    }
+
+    public function posts() {
+        return $this->hasMany('App\Posts');
+    }
 }

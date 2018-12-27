@@ -52,22 +52,18 @@
                         <div class="text-right">
                             <small id="emailHelpId" class="form-text text-muted">Onay kodu gönderilecektir.</small>
                         </div>
-                        <div v-if="registerErrors.email" class="alert alert-danger text-right">{{ registerErrors.email }}</div>
                     </div>
                     <div class="form-group">
                         <img src="/svg/avatar.svg">
                         <input type="text" class="form-control" name="" aria-describedby="helpId" placeholder="Kullanıcı Adı" v-model="registerUsername">
-                        <div v-if="registerErrors.username" class="alert alert-danger text-right">{{ registerErrors.username }}</div>
                     </div>
                     <div class="form-group">
                         <img src="/svg/password.svg">
                         <input type="password" class="form-control" name="" aria-describedby="helpId" placeholder="Şifre" v-model="registerPassword">
-                        <div v-if="registerErrors.password" class="alert alert-danger text-right">{{ registerErrors.password }}</div>
                     </div>
                     <div class="form-group">
                         <img src="/svg/password.svg">
                         <input type="password" class="form-control" name="" aria-describedby="helpId" placeholder="Şifre Tekrar" v-model="registerPasswordRepeat">
-                        <div v-if="registerErrors.password_confirmation" class="alert alert-danger text-right">{{ registerErrors.password_confirmation }}</div>
                     </div>
                     <button type="submit" class="btn btn-primary">Kayıt Ol</button>
                 </form>
@@ -76,13 +72,44 @@
             </div>
             <div class="forgotPasswordForm" v-if="formType=='forgot'">
                 <div class="or">şifremi unuttum</div>
-                <div class="form-group">
-                    <img src="/svg/avatar.svg">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Kullanıcı Adı">
-                </div>
-                <button type="button" class="btn btn-primary">Şifremi Yenile</button>
+                <form autocomplete="off" @submit.prevent="forgotSubmit()">
+                    <div class="form-group">
+                        <img src="/svg/avatar.svg">
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Kullanıcı Adı" v-model="forgotUsername">
+                    </div>
+                    <div class="or">veya</div>
+                    <div class="form-group">
+                        <img src="/svg/email.svg">
+                        <input type="text" class="form-control" name="" aria-describedby="helpId" placeholder="Email Adresiniz" v-model="forgotEmail">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Şifremi Yenile</button>
+                </form>
                 <div class="or">veya</div>
-                <button type="button" class="btn registerButton" @click="changeFormType('register')">Giriş Yap</button>
+                <button type="button" class="btn registerButton" @click="changeFormType('login')">Giriş Yap</button>
+            </div>
+            <div class="ForgotActivationForm" v-if="formType=='forgotActivation'">
+                <div class="or">mail doğrulama</div>
+                <form autocomplete="off" @submit.prevent="activationForgotSubmit()">
+                    <div class="text-center">
+                        Lütfen mail adresinize gönderilen<br/>doğrulama kodunu yazınız.
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control activationInput" name="" id="" aria-describedby="helpId" placeholder="" v-model="forgotActivationCode" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <img src="/svg/password.svg">
+                        <input type="password" class="form-control" name="" aria-describedby="helpId" placeholder="Şifre" v-model="forgotPassword">
+                    </div>
+                    <div class="form-group">
+                        <img src="/svg/password.svg">
+                        <input type="password" class="form-control" name="" aria-describedby="helpId" placeholder="Şifre Tekrar" v-model="forgotPasswordRepeat">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Doğrula</button>
+                </form>
+                <div class="form-group">
+                    <br/>
+                    <button type="button" class="btn" @click="forgotSubmit">Tekrar Gönder</button>
+                </div>
             </div>
         </div>
     </div>
@@ -100,13 +127,21 @@
         data() {
             return {
                 formType : this.form,
+                username : '',
+                password : '',
                 registerEmail : '',
                 registerUsername : '',
                 registerPassword : '',
                 registerPasswordRepeat : '',
                 registerErrors : [],
                 activationMail : '',
-                activationCode : ''
+                activationCode : '',
+                forgotUsername : '',
+                forgotEmail : '',
+                forgotUserId : '',
+                forgotActivationCode : '',
+                forgotPassword : '',
+                forgotPasswordRepeat : ''
             }
         },
         methods: {
@@ -131,7 +166,6 @@
                             app.formType = 'activation';
                             this.$snotify.success('Doğrulama kodunuz için mail adresinizi kontrol edin');
                         } else {
-                            this.$parent.isLoading = false;
                             this.$parent.showErrors(response.data.message);
                         }
                     }
@@ -152,7 +186,6 @@
                         if(response.data.success) {
                             this.$snotify.success('Yeni doğrulama kodunuz gönderildi');
                         } else {
-                            this.$parent.isLoading = false;
                             this.$parent.showErrors(response.data.message);
                         }
                     }
@@ -174,7 +207,6 @@
                         if(response.data.success) {
                             location.href='/profile';
                         } else {
-                            this.$parent.isLoading = false;
                             this.$parent.showErrors(response.data.message);
                         }
                     }
@@ -196,7 +228,52 @@
                         if(response.data.success) {
                             location.href='/profile';
                         } else {
-                            this.$parent.isLoading = false;
+                            this.$parent.showErrors(response.data.message);
+                        }
+                    }
+                }).catch(error=>{
+                    this.$parent.showErrors({'message':['Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz']});
+                })
+            },
+            forgotSubmit() {
+                this.$parent.isLoading = true;
+                var app = this;
+                axios.post('/forgot',
+                    {
+                        username : app.forgotUsername,
+                        email : app.forgotEmail
+                    }
+                ).then(response=>{
+                    if(response.status==200) {
+                        this.$parent.isLoading = false;
+                        if(response.data.success) {
+                            app.forgotUserId = response.data.userid;
+                            this.$snotify.success('Doğrulama kodunuz gönderildi');
+                            app.formType = 'forgotActivation';
+                        } else {
+                            this.$parent.showErrors(response.data.message);
+                        }
+                    }
+                }).catch(error=>{
+                    this.$parent.showErrors({'message':['Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz']});
+                })
+            },
+            activationForgotSubmit() {
+                this.$parent.isLoading = true;
+                var app = this;
+                axios.post('/forgot-password-update',
+                    {
+                        userid : app.forgotUserId,
+                        code : app.forgotActivationCode,
+                        password : app.forgotPassword,
+                        password_confirmation : app.forgotPasswordRepeat
+                    }
+                ).then(response=>{
+                    if(response.status==200) {
+                        this.$parent.isLoading = false;
+                        if(response.data.success) {
+                            location.href='/profile';
+                        } else {
                             this.$parent.showErrors(response.data.message);
                         }
                     }

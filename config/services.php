@@ -40,4 +40,25 @@ return [
         ],
     ],
 
+    'twitter' => [
+        'client_id'     => env('TWITTER_ID'),
+        'client_secret' => env('TWITTER_SECRET'),
+        'redirect'      => env('TWITTER_URL'),
+    ],
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect'      => env('FACEBOOK_URL'),
+    ],
+    'instagram' => [
+        'client_id' => env('INSTAGRAM_KEY'),
+        'client_secret' => env('INSTAGRAM_SECRET'),
+        'redirect' => env('INSTAGRAM_REDIRECT_URI')
+    ],
+    'linkedin' => [
+        'client_id' => env('LINKEDIN_ID'),
+        'client_secret' => env('LINKEDIN_SECRET'),
+        'redirect' => env('LINKEDIN_CALLBACK')
+    ]
+
 ];
