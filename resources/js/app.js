@@ -4,7 +4,7 @@ window.Vue = require('vue');
 window.VueGoogleMaps = require('vue2-google-maps');
 Vue.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyDqcIx-ZLfj6wIbZaMKQRSbv8uKoOkakRk',
+        key: 'AIzaSyAGTDzdpHzvHW_DEyQgRC_hA2-btaxypHs',
         libraries: 'places',
         language : 'tr'
     },
