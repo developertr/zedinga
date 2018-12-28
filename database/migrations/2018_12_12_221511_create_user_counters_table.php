@@ -15,7 +15,6 @@ class CreateUserCountersTable extends Migration
     {
         Schema::create('user_counters', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
             $table->integer('user_id')->references('id')->on('users');
             $table->integer('follower')->default(0);
             $table->integer('friend')->default(0);

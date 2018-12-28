@@ -15,7 +15,7 @@ class CreatePostLikesDislikesTable extends Migration
     {
         Schema::create('post_likes_dislikes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->references('id')->on('users');
             $table->integer('post_id');
             $table->decimal('score_value',2,1)->default(0.0);
             $table->boolean('like_type')->default(1); // 0 = Remove Like or Dislike , 1 = Like , 2 = Dislike , 3 = Score Post
